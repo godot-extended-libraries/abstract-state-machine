@@ -12,6 +12,7 @@ static func compile_state_machine(controller:Control) -> void:
 			
 			st["functions"] = state.get_state_functions();
 			st["transitions"] = state.get_connections();
+			st["bools"] = [str(state.has_init),str(state.has_exit)]
 		elif gn.state.type == State.Type.ENTRY:
 			if _is_invalid(gn): return
 			dict.start_state = gn.state.get_connections()[0]
@@ -55,7 +56,9 @@ static func _generate_machine(dict):
 	#Registers
 	for state in states:
 		var st = state.to_upper()
-		var code = "\tstate_machine.register_state(%s,\"%s\",%s,%s)\n" % ["STATE."+st,state,str(false),str(false)]
+		var code = "\tstate_machine.register_state(%s,\"%s\",%s,%s)\n" % ["STATE."+st,state,
+		dict["states"][state]["bools"][0].to_lower(),
+		dict["states"][state]["bools"][1].to_lower()]
 		ready += code
 	
 	#initial state
@@ -82,5 +85,9 @@ static func _generate_source(dict:Dictionary)-> void:
 			
 	print("SOURCE CODE --------------------------------------------")
 	print(dict.source_code)
+	var file = File.new()
+	file.open("res://addons/ASM/compiled/CustomStateMachine.gd",File.WRITE)
+	file.store_string(dict.source_code)
+	file.close()
 	pass
 
