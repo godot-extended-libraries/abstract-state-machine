@@ -1,3 +1,4 @@
+tool
 extends GraphEdit
 class_name ASM_GraphEdit
 
@@ -29,10 +30,12 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if (event.is_pressed() and event.button_index == BUTTON_RIGHT and $ItemList.visible == false):
 			print("pressed")
-			$ItemList.rect_position = event.position
+			$ItemList.rect_position = event.position - Vector2(300,80)
 			$ItemList.visible = true;
 			pass
 		pass
+#	elif event is InputEventMouseMotion:
+#		$ItemList.rect_position = event.position 
 
 func _on_ItemList_mouse_exited():
 	$ItemList.visible = false;

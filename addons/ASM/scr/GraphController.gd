@@ -1,3 +1,4 @@
+tool
 extends Control
 class_name GraphController
 
@@ -77,6 +78,7 @@ func get_all_gnodes() -> Array:
 	return get_tree().get_nodes_in_group("ASM_GN");
 	
 func _on_GraphEdit_connection_request(from, from_slot, to, to_slot):
+	print(active_graph)
 	active_graph.connect_node(from, from_slot, to, to_slot)
 	var node_from = active_graph.find_node(from)
 	var node_to = active_graph.find_node(to)

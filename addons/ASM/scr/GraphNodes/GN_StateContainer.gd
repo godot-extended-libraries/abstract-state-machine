@@ -1,3 +1,4 @@
+tool
 extends ASM_GN
 
 var has_graph:bool = false

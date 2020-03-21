@@ -1,3 +1,4 @@
+tool
 extends ASM_GN
 
 onready var le_name:LineEdit = $LineEdit
@@ -9,6 +10,9 @@ func _ready():
 
 
 func _on_GNState_close_request():
+	
+	queue_free()
+	
 	pass # Replace with function body.
 
 

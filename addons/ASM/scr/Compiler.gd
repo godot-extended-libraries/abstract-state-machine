@@ -61,11 +61,13 @@ static func _generate_machine(dict):
 		dict["states"][state]["bools"][1].to_lower()]
 		ready += code
 	
+	var update = "\nfunc _process(_delta):\n\tstate_machine.machine_update()\n\n"
+	
 	#initial state
 	var initial = "\tstate_machine.change_state(STATE.%s)\n" % initial_state
 	
 	
-	source_code += call+enums+ready+initial
+	source_code += call+enums+ready+initial+update
 	print(source_code)
 	dict["source_code"] = source_code
 	pass

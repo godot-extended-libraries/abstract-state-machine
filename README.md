@@ -6,28 +6,35 @@ for your game:
 ![ASM in action](https://i.imgur.com/1RWHFyK.png)
 
 
-## WIP Alpha 0.1
-I did this plugin for my game, since the plugin is alpha, I want to add a lot of features yet, like:
-* Run at editor
-* State Machine working animation (live feedback)
-* State Containers (for better organization)
-* Edit an existing code (in case you have a script and want to attach the state machine automatically)
-* Save/Load System
-* And a lot of things
+## WIP Alpha 0.5
+** New Features: **
+[x] Run at editor
+[x] Delete States
+[ ] State Machine working animation (live feedback)
+[ ] State Containers (for better organization)
+[ ] Edit an existing code (in case you have a script and want to attach the state machine automatically)
+[ ] Save/Load System
+[ ] And a lot of things
+** Bug Fixes **
+* Compile.gd was not producing _process() to update the state machine
+* Right-Mouse click was generating itemlist far from mouse (needs testing on different screens)
 
 ## How to Use:
 * Download this
 * Extract to your project's addon folder
-* Since this tool runs at runtime you dont need to enable/disable plugin in order to work
-* Open GraphController.scn
-* Press F6 to run
+* Now you need to enable the plugin
+* You should see an ASM on the engine's top (where 2d,3d is located)
 * Make your State Machine
 * Click at the compile button at the top
 * Get your ready-to-go CustomStateMachine at res://addons/ASM/compiled/CustomStateMachine.gd
+	- If you can see inside the engine use the system folder explorer
+	- Engine's Output tab will give you information if anything happens
 * Have fun
 
-## PS
-I encourage you to test this plugin and give me feedback, enhancement ideas, Pull requests, lets make this tool very powerful!
+## Known Issues
+* If you create a state connect it, and then rename it, can cause compile errors
+* I encourage you to test this plugin and give me feedback, enhancement ideas, Pull requests, lets make this tool very powerful!
+
 
 ## How this SH@T works behind the scenes?
 

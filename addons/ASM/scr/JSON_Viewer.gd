@@ -1,3 +1,4 @@
+tool
 extends Panel
 class_name JSONViewer
 
