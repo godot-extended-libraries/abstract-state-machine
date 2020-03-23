@@ -1,7 +1,10 @@
 # WIP - Abstract State Machine (ASM)
 
 ASM is a GraphNode Based State machine tool for Godot 3, It generates a ready-to-go state machine
-for your game:
+for your game
+
+# News
+ASM is now part of Godot Extended Libraries (GEL)
 
 ![ASM in action](https://i.imgur.com/5PedUZm.png)
 ![Generated code](https://i.imgur.com/jAyiAeQ.png)
