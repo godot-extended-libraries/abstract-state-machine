@@ -1,23 +1,30 @@
 # WIP - Abstract State Machine (ASM)
 
 ASM is a GraphNode Based State machine tool for Godot 3, It generates a ready-to-go state machine
-for your game:
+for your game
 
-![ASM in action](https://i.imgur.com/1RWHFyK.png)
+# News
+ASM is now part of Godot Extended Libraries (GEL)
 
+![ASM in action](https://i.imgur.com/5PedUZm.png)
+![Generated code](https://i.imgur.com/jAyiAeQ.png)
 
 ## WIP Alpha 0.5
-** New Features: **
-[x] Run at editor
-[x] Delete States
-[ ] State Machine working animation (live feedback)
-[ ] State Containers (for better organization)
-[ ] Edit an existing code (in case you have a script and want to attach the state machine automatically)
-[ ] Save/Load System
-[ ] And a lot of things
-** Bug Fixes **
-* Compile.gd was not producing _process() to update the state machine
-* Right-Mouse click was generating itemlist far from mouse (needs testing on different screens)
+
+**New Features:**
+
+- [x] Run at editor
+- [x] Delete States
+- [ ] State Machine working animation (live feedback)
+- [ ] State Containers (for better organization)
+- [ ] Edit an existing code (in case you have a script and want to attach the state machine automatically)
+- [ ] Save/Load System
+- [ ] And a lot of things
+
+**Bug Fixes**
+
+- [x] Compile.gd was not producing _process() to update the state machine
+- [x] Right-Mouse click was generating itemlist far from mouse (needs testing on different screens)
 
 ## How to Use:
 * Download this
