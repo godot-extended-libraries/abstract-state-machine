@@ -2,6 +2,8 @@ tool
 extends Control
 class_name GraphController
 
+export var np_main_graph_edit:NodePath
+
 var ps_graph = load("res://addons/ASM/MainGraphEdit.scn")
 var ps_state = load("res://addons/ASM/GraphNodes/GN_State.scn")
 var ps_statec = load("res://addons/ASM/GraphNodes/GN_StateContainer.scn")
@@ -9,16 +11,22 @@ var ps_exit = load("res://addons/ASM/GraphNodes/GN_Exit.scn")
 
 var graphs = []
 var states = []
-
+var id_auto_increment:int = 0
 var active_graph = null
 var graph_id_auto_increment:int = 0;
+
+var connection_manager:ConnectionManager
+
 #var script_manager:ScriptManager = ScriptManager.new();
 onready var viewer:JSONViewer = $JSONViewer
 onready var start_state:GraphNode = $Graphs/MainGraphEdit/GNStart
-func _ready():
-	var graph_edit = $Graphs/MainGraphEdit
-	active_graph = graph_edit;
-	graphs.append(graph_edit)
+func _enter_tree():
+	connection_manager = ConnectionManager.new(self)
+	add_child_below_node(self,connection_manager,true)
+	print("initialized HraphController")
+	active_graph = get_node(np_main_graph_edit);
+	print("activegraph: "+active_graph.name)
+	graphs.append(active_graph)
 	pass
 
 func _process(delta):
@@ -28,6 +36,8 @@ func _process(delta):
 #	viewer.set_data(script_manager.data)
 
 func _add_graph_node(node:GraphNode):
+	print(graphs)
+	print(active_graph)
 	active_graph.add_child(node)
 	node.set_owner(active_graph)
 	print("node owner: "+node.owner.name)
@@ -40,7 +50,10 @@ func add_state():
 func add_statec():
 	_add_graph_node(ps_statec.instance())
 
-
+func get_ai_id() -> int:
+	var id = id_auto_increment;
+	id_auto_increment += 1;
+	return id
 
 func main_add_graph_edit() -> Node:
 	var node = ps_graph.instance()
@@ -76,15 +89,23 @@ func get_connections_from(from) -> Array:
 
 func get_all_gnodes() -> Array:
 	return get_tree().get_nodes_in_group("ASM_GN");
-	
-func _on_GraphEdit_connection_request(from, from_slot, to, to_slot):
-	print(active_graph)
-	active_graph.connect_node(from, from_slot, to, to_slot)
-	var node_from = active_graph.find_node(from)
-	var node_to = active_graph.find_node(to)
-	node_from.state.set_connections(node_to,true)
-	prints(from, str(from_slot), to, str(to_slot))
-	pass # Replace with function body.
+
+func get_active_gnodes() -> Array:
+	var arr = []
+	var temp = active_graph.get_children()
+	for child in temp:
+		if child.is_in_group("ASM_GN"):
+			arr.append(child)
+		else: continue
+	return arr
+#func _on_GraphEdit_connection_request(from, from_slot, to, to_slot):
+#	print(active_graph)
+#	active_graph.connect_node(from, from_slot, to, to_slot)
+#	var node_from = active_graph.find_node(from)
+#	var node_to = active_graph.find_node(to)
+#	node_from.state.set_connections(node_to,true)
+#	prints(from, str(from_slot), to, str(to_slot))
+#	pass # Replace with function body.
 
 
 func _on_GraphEdit_disconnection_request(from, from_slot, to, to_slot):

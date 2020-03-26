@@ -3,5 +3,6 @@ extends ASM_GN
 
 
 func _ready():
-	state = State.new("entry",offset,State.Type.ENTRY)
+	graph_control = get_tree().get_nodes_in_group("Controller")[0]
+	state = State.new(graph_control.get_ai_id(),"entry",offset,State.Type.ENTRY,self)
 	pass

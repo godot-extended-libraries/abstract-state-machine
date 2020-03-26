@@ -2,17 +2,23 @@ extends Resource
 class_name State
 
 enum Type {NORMAL,ENTRY,EXIT}
+export(int) var ID;
 export(String) var name;
 export(Type) var type = Type.NORMAL
 export(bool) var has_init = false;
 export(bool) var has_exit = false;
 export(Vector2) var offset;
 export(Array, Resource) var connections setget set_connections,get_connections;
+export(Dictionary) var clicked_points
 
-func _init(name:String,offset:Vector2,t:int = 0):
+var graph_node:GraphNode setget set_graph_node
+
+func _init(id:int,name:String,offset:Vector2,t:int = 0,graph_node:GraphNode=null):
 	self.name = name;
 	self.offset = offset;
 	self.type = t;
+	self.ID = id;
+	self.graph_node = graph_node
 
 func get_json() -> JSONParseResult:
 	var dict = {}
@@ -28,6 +34,9 @@ func get_state_functions() -> Array:
 	arr.append("st_update_"+name)
 	if has_exit: arr.append("st_exit_"+name)
 	return arr
+
+func add_connection(node_to):
+	connections.append(node_to.state)
 
 func set_connections(_connections,add:bool=false) -> void:
 	var arr = []
@@ -45,3 +54,6 @@ func set_connections(_connections,add:bool=false) -> void:
 
 func get_connections() -> Array:
 	return connections
+
+func set_graph_node(value):
+	graph_node = value

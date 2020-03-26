@@ -1,0 +1,1 @@
+{"name":"ASM","tables":[{"table_name":"connections","props":[{"name":"from","type":"4","auto_increment":"0"},{"name":"to","type":"4","auto_increment":"0"},{"name":"from_clicked","type":"0","auto_increment":"0"},{"name":"to_clicked","type":"0","auto_increment":"0"}],"data":[]}]}

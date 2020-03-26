@@ -5,13 +5,12 @@ onready var le_name:LineEdit = $LineEdit
 func _ready():
 	le_name.text = "state_"+str(randi())
 	name = le_name.text
-	state = State.new(le_name.text,offset)
+	state = State.new(graph_control.get_ai_id(),le_name.text,offset,0,self)
 	pass
 
 
 func _on_GNState_close_request():
-	
-	queue_free()
+	call_deferred("free")
 	
 	pass # Replace with function body.
 
